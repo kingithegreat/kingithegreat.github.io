@@ -282,9 +282,30 @@
   @media (max-width:900px){.specs{grid-template-columns:repeat(2,1fr)}}
   @media (max-width:460px){.specs{grid-template-columns:1fr}}
 
+  .bio{
+    display:flex;
+    align-items:flex-start;
+    gap:clamp(18px,3vw,28px);
+    margin:clamp(30px,5vw,44px) 0 0;
+  }
+  .portrait{
+    flex:0 0 auto;
+    width:clamp(84px,11vw,124px);
+    height:auto;
+    aspect-ratio:1;
+    object-fit:cover;
+    border-radius:22px;
+    border:1px solid var(--edge-bright);
+    background:var(--glass-strong);
+    box-shadow:0 18px 48px rgba(0,0,0,.35), 0 0 0 4px rgba(52,198,140,.12), inset 0 1px 0 rgba(255,255,255,.07);
+  }
+  @media (max-width:520px){
+    .bio{gap:16px}
+    .portrait{width:76px;border-radius:18px}
+  }
   .thesis{
     max-width:62ch;
-    margin:clamp(30px,5vw,44px) 0 0;
+    margin:0;
     font-size:clamp(16px,2.1vw,18.5px);
     line-height:1.62;
   }
@@ -552,7 +573,7 @@
 
   /* ---------- Entry motion ---------- */
   @media (prefers-reduced-motion: no-preference){
-    .hero .eyebrow,.name,.role,.spec,.thesis,.actions{
+    .hero .eyebrow,.name,.role,.spec,.bio,.actions{
       opacity:0;
       transform:translateY(18px);
       animation:rise .7s cubic-bezier(.2,.7,.3,1) forwards;
@@ -563,7 +584,7 @@
     .spec:nth-child(2){animation-delay:.32s}
     .spec:nth-child(3){animation-delay:.4s}
     .spec:nth-child(4){animation-delay:.48s}
-    .thesis{animation-delay:.56s}
+    .bio{animation-delay:.56s}
     .actions{animation-delay:.64s}
     @keyframes rise{to{opacity:1;transform:none}}
 
@@ -645,7 +666,10 @@
       </div>
     </dl>
 
-    <p class="thesis">I came to software from the workshop floor — boat building, stone masonry, aluminium joinery, installation work. That's where I learned the part most people find hardest: <strong>finishing the job</strong>. I write TypeScript, Angular, React and Luau, I test before I ship, and I put everything I build on a pipeline so it can't quietly break.</p>
+    <div class="bio">
+      <img class="portrait" src="assets/headshot.webp" alt="Aden Kingi" width="800" height="800" loading="eager" decoding="async">
+      <p class="thesis">I came to software from the workshop floor — boat building, stone masonry, aluminium joinery, installation work. That's where I learned the part most people find hardest: <strong>finishing the job</strong>. I write TypeScript, Angular, React and Luau, I test before I ship, and I put everything I build on a pipeline so it can't quietly break.</p>
+    </div>
 
     <div class="actions">
       <a class="btn" href="#work">See the work</a>
