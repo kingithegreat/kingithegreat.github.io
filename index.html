@@ -333,10 +333,16 @@
   /* ---------- Work tiles ---------- */
   .jobs{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(6,1fr);
     gap:18px;
   }
-  @media (max-width:800px){.jobs{grid-template-columns:1fr}}
+  .job.b4{grid-column:span 4}
+  .job.b3{grid-column:span 3}
+  .job.b2{grid-column:span 2}
+  @media (max-width:800px){
+    .jobs{grid-template-columns:1fr}
+    .job.b4,.job.b3,.job.b2{grid-column:auto}
+  }
   .job{
     padding:clamp(24px,3.5vw,32px);
     display:flex;
@@ -468,6 +474,41 @@
 
   /* ---------- Contact ---------- */
   .contact{padding:0 0 clamp(48px,7vw,80px)}
+  /* ---------- Spotlight (desktop pointers only) ---------- */
+  @media (hover:hover) and (pointer:fine){
+    .tile{position:relative;overflow:hidden}
+    .tile::after{
+      content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+      background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%),rgba(52,198,140,.13),transparent 65%);
+      opacity:0;transition:opacity .25s ease;
+    }
+    .tile:hover::after{opacity:1}
+    .job.tile:hover{transform:translateY(-4px);border-color:rgba(52,198,140,.45)}
+  }
+
+  /* ---------- Stack ticker ---------- */
+  .ticker{
+    overflow:hidden;
+    margin:clamp(20px,4vh,44px) 0 0;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+  }
+  .ticker-track{
+    display:flex;gap:34px;width:max-content;
+    font-family:var(--data);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--moss);white-space:nowrap;
+    animation:tick 30s linear infinite;
+  }
+  .ticker-track b{color:var(--jade);font-weight:400}
+  @keyframes tick{to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion: reduce){.ticker-track{animation:none}}
+
+  /* ---------- Grain ---------- */
+  .grain{
+    position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
   .contact .tile{padding:clamp(30px,5vw,48px)}
   .contact h2{
     font-family:var(--display);
@@ -557,6 +598,7 @@
 </head>
 <body>
 <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="grain" aria-hidden="true"></div>
 <div class="feed" aria-hidden="true"></div>
 <a class="skip" href="#work">Skip to the work</a>
 
@@ -605,15 +647,17 @@
 </header>
 
 <main>
+<div class="ticker" aria-hidden="true"><div class="ticker-track"><span>TypeScript<b>·</b>Luau<b>·</b>Electron<b>·</b>React<b>·</b>Angular<b>·</b>Firebase<b>·</b>Kotlin<b>·</b>Node.js<b>·</b>Rojo<b>·</b>GitHub Actions<b>·</b>Stripe<b>·</b>Three.js<b>·</b>Ollama<b>·</b>Cloud Run<b>·</b></span><span>TypeScript<b>·</b>Luau<b>·</b>Electron<b>·</b>React<b>·</b>Angular<b>·</b>Firebase<b>·</b>Kotlin<b>·</b>Node.js<b>·</b>Rojo<b>·</b>GitHub Actions<b>·</b>Stripe<b>·</b>Three.js<b>·</b>Ollama<b>·</b>Cloud Run<b>·</b></span></div></div>
+
 <section id="work">
   <div class="wrap">
     <div class="sec-head">
       <h2>Selected work</h2>
-      <span class="eyebrow">Six of twenty-six</span>
+      <span class="eyebrow">Six of twenty-seven</span>
     </div>
 
     <div class="jobs">
-    <article class="job tile">
+    <article class="job tile b4">
       <div class="job-id">Desktop application <span class="tag">Capstone</span></div>
       <h3>HomeBot</h3>
       <p>A desktop AI assistant that runs entirely on your own machine. Local model inference through Ollama means nothing you say leaves the computer. Every action it can take — reading a file, running a command, opening an app — sits behind a permission gate you approve first, so the assistant is useful without being trusted blindly.</p>
@@ -625,7 +669,7 @@
       </ul>
     </article>
 
-    <article class="job tile">
+    <article class="job tile b2">
       <div class="job-id">Web application — SaaS</div>
       <h3>BusinessFlow</h3>
       <p>A tool for New Zealand sole traders and small businesses to build a professional web presence and take payment, without hiring anybody. Subscription billing, file uploads, discount codes and per-customer branding. Deployed continuously — a merge to main reaches production in under four minutes.</p>
@@ -637,7 +681,7 @@
       </ul>
     </article>
 
-    <article class="job tile">
+    <article class="job tile b4">
       <div class="job-id">Game <span class="tag live">Live</span></div>
       <h3><a href="https://www.roblox.com/games/87172674938276">Gym Simulator</a></h3>
       <p>A training-progression game on Roblox. Every stat lives on the server, so nothing can be edited by the client — a rule I set early and never broke. Ships itself: pushing to main builds the place file and publishes it to the live experience automatically.</p>
@@ -649,7 +693,7 @@
       </ul>
     </article>
 
-    <article class="job tile">
+    <article class="job tile b2">
       <div class="job-id">Game <span class="tag live">Live</span></div>
       <h3><a href="https://www.roblox.com/games/73547990625466">Vacuum Palace</a></h3>
       <p>Clear a mansion room by room, upgrade the vacuum, unlock the next floor. Rebuilt the touch controls after playtesting on my own phone showed the game was effectively playing itself — a good reminder that a passing test suite says nothing about whether something is fun.</p>
@@ -661,7 +705,7 @@
       </ul>
     </article>
 
-    <article class="job tile">
+    <article class="job tile b3">
       <div class="job-id">Web application — game</div>
       <h3><a href="https://comand.vercel.app">Tactical Command</a></h3>
       <p>A browser-based real-time strategy game with low-poly 3D units rendered in WebGL. No install, no plugin — it loads in a tab and runs.</p>
@@ -672,7 +716,7 @@
       </ul>
     </article>
 
-    <article class="job tile">
+    <article class="job tile b3">
       <div class="job-id">Mobile application</div>
       <h3>Pokie Palace</h3>
       <p>A New Zealand-themed slots game played with virtual coins only — no real money in or out. The interesting part is underneath: the payout maths is tuned to a target return and then verified by simulating two million spins, so the numbers are proven rather than assumed.</p>
@@ -811,6 +855,22 @@
   }, { threshold: 0.6 });
 
   cells.forEach(function (c) { io.observe(c); });
+})();
+</script>
+<script>
+(function(){
+  if(!matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  var raf=null;
+  document.addEventListener('pointermove',function(e){
+    var t=e.target.closest?e.target.closest('.tile'):null;
+    if(!t||raf) return;
+    raf=requestAnimationFrame(function(){
+      raf=null;
+      var r=t.getBoundingClientRect();
+      t.style.setProperty('--mx',(e.clientX-r.left)+'px');
+      t.style.setProperty('--my',(e.clientY-r.top)+'px');
+    });
+  },{passive:true});
 })();
 </script>
 </body>
