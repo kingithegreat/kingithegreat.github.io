@@ -12,7 +12,12 @@
 <meta property="og:description" content="Tauranga, New Zealand. 27 repositories, nine games, one AI desktop assistant, two products live.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kingithegreat.github.io/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://kingithegreat.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_NZ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kingithegreat.github.io/og.png">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23081712'/><text x='16' y='22' font-family='monospace' font-size='14' font-weight='700' text-anchor='middle' fill='%2334C68C'>AK</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -483,7 +488,8 @@
       opacity:0;transition:opacity .25s ease;
     }
     .tile:hover::after{opacity:1}
-    .job.tile:hover{transform:translateY(-4px);border-color:rgba(52,198,140,.45)}
+    .job.tile:hover{translate:0 -4px;border-color:rgba(52,198,140,.45)}
+    .job.tile{transition:translate .25s ease,border-color .25s ease}
   }
 
   /* ---------- Stack ticker ---------- */
@@ -494,12 +500,12 @@
     mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
   }
   .ticker-track{
-    display:flex;gap:34px;width:max-content;
+    display:flex;gap:0;width:max-content;
     font-family:var(--data);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
     color:var(--moss);white-space:nowrap;
     animation:tick 30s linear infinite;
   }
-  .ticker-track b{color:var(--jade);font-weight:400}
+  .ticker-track b{color:var(--jade);font-weight:400;margin:0 15px}
   @keyframes tick{to{transform:translateX(-50%)}}
   @media (prefers-reduced-motion: reduce){.ticker-track{animation:none}}
 
