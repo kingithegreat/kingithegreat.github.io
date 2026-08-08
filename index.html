@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Aden Kingi — Software Developer, Tauranga NZ</title>
-<meta name="description" content="Software developer in Tauranga, New Zealand. Bachelor of Applied Information Technology, A/A+ average. Builds desktop AI tooling, web apps and games — 26 repositories, two products live.">
+<meta name="description" content="Software developer in Tauranga, New Zealand. Bachelor of Applied Information Technology, A/A+ average. Builds desktop AI tooling, web apps and games — 27 repositories, two products live.">
 <meta name="author" content="Aden Kingi">
 <meta name="theme-color" content="#081712">
 <link rel="canonical" href="https://kingithegreat.github.io/">
 <meta property="og:title" content="Aden Kingi — Software Developer">
-<meta property="og:description" content="Tauranga, New Zealand. 26 repositories, nine games, one AI desktop assistant, two products live.">
+<meta property="og:description" content="Tauranga, New Zealand. 27 repositories, nine games, one AI desktop assistant, two products live.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kingithegreat.github.io/">
 <meta name="twitter:card" content="summary">
@@ -135,6 +135,11 @@
   @supports (backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px)){
     .tile{-webkit-backdrop-filter:blur(18px) saturate(1.2);backdrop-filter:blur(18px) saturate(1.2)}
   }
+  @media (max-width:720px){
+    .aurora i{filter:blur(56px)}
+    .aurora i:nth-child(3){display:none}
+    .tile{-webkit-backdrop-filter:blur(12px) saturate(1.15);backdrop-filter:blur(12px) saturate(1.15)}
+  }
   @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
     .tile{background:rgba(16,38,29,.82)}
   }
@@ -198,9 +203,12 @@
   @media (max-width:720px){
     .nav a.link.hide-s{display:none}
   }
+  .nav .brand .b-short{display:none}
   @media (max-width:460px){
     .nav{padding-left:12px}
     .nav a.link{padding:9px 9px}
+    .nav .brand .b-full{display:none}
+    .nav .brand .b-short{display:inline}
   }
 
   /* ---------- Hero ---------- */
@@ -553,7 +561,7 @@
 <a class="skip" href="#work">Skip to the work</a>
 
 <nav class="nav tile" aria-label="Site">
-  <a class="brand" href="#top">Aden Kingi</a>
+  <a class="brand" href="#top"><span class="b-full">Aden Kingi</span><span class="b-short">AK</span></a>
   <a class="link" href="#work">Work</a>
   <a class="link hide-s" href="#method">Method</a>
   <a class="link hide-s" href="#background">Background</a>
@@ -575,7 +583,7 @@
       </div>
       <div class="spec tile">
         <dt>Repositories</dt>
-        <dd><span class="dro" data-count="26">26</span><small>Built and maintained solo this year, with CI on every one.</small></dd>
+        <dd><span class="dro" data-count="27">27</span><small>Built and maintained solo this year, with CI on every one.</small></dd>
       </div>
       <div class="spec tile">
         <dt>Shipped</dt>
