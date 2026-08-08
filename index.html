@@ -87,7 +87,7 @@
     z-index:-1;
     width:100vw;height:100vh;
     pointer-events:none;
-    opacity:.55;
+    opacity:.7;
     mix-blend-mode:screen;
   }
 
@@ -919,6 +919,7 @@
       if (t < 1) requestAnimationFrame(step);
       else el.textContent = target;
     }
+    if (window.JADE_ORB_FRAME) window.JADE_ORB_FRAME();
     requestAnimationFrame(step);
   }
 
@@ -983,7 +984,7 @@
       y: anywhere ? Math.random() * H : (Math.random() < .5 ? -8 : H + 8),
       vx: 0, vy: 0,
       r: .6 + Math.random() * 1.5,
-      a: .12 + Math.random() * .3,
+      a: .16 + Math.random() * .34,
       hue: Math.random() < .8 ? 0 : 1, // 0 jade, 1 fern
       life: 400 + Math.random() * 900
     };
@@ -1022,8 +1023,8 @@
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r + v * 1.2, 0, 6.2832);
       ctx.fillStyle = p.hue
-        ? 'rgba(143,227,188,' + (p.a + v * .3) + ')'
-        : 'rgba(52,198,140,' + (p.a + v * .28) + ')';
+        ? 'rgba(140,250,232,' + (p.a + v * .34) + ')'
+        : 'rgba(64,225,205,' + (p.a + v * .32) + ')';
       ctx.fill();
     }
     requestAnimationFrame(step);
@@ -1047,6 +1048,109 @@
 
   size();
   requestAnimationFrame(step);
+})();
+</script>
+<script>
+/* Aqua orb — hand-rolled 3D particle sphere on the same canvas, zero dependencies.
+   Idle: slow rotation. Pointer near it: spins with your drag and deforms, springs back. */
+(function(){
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var cv = document.getElementById('current');
+  var hero = document.getElementById('top');
+  if (!cv || !hero || !cv.getContext) return;
+  var ctx = cv.getContext('2d');
+
+  var NPTS = 300, pts = [], pairs = [];
+  var ay = 0, ax = -0.35, vy = 0.0022, vxr = 0.0004;
+  var px = -1e4, py = -1e4, lpx = 0, lpy = 0;
+
+  // fibonacci sphere
+  var GA = Math.PI * (3 - Math.sqrt(5));
+  for (var i = 0; i < NPTS; i++){
+    var yy = 1 - (i / (NPTS - 1)) * 2;
+    var rr = Math.sqrt(1 - yy * yy);
+    var th = GA * i;
+    pts.push({ x: Math.cos(th) * rr, y: yy, z: Math.sin(th) * rr,
+               ox: 0, oy: 0, vx: 0, vy: 0, sx: 0, sy: 0, s: 0, d: 0 });
+  }
+  // precompute 2 nearest neighbours per point (static constellation lines)
+  for (i = 0; i < NPTS; i++){
+    var best = [[9, -1], [9, -1]];
+    for (var j = 0; j < NPTS; j++){
+      if (i === j) continue;
+      var dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y, dz = pts[i].z - pts[j].z;
+      var d2 = dx * dx + dy * dy + dz * dz;
+      if (d2 < best[0][0]) { best[1] = best[0]; best[0] = [d2, j]; }
+      else if (d2 < best[1][0]) { best[1] = [d2, j]; }
+    }
+    if (best[0][1] > i) pairs.push([i, best[0][1]]);
+    if (best[1][1] > i) pairs.push([i, best[1][1]]);
+  }
+
+  function orbFrame(){
+    var vw = window.innerWidth, r = hero.getBoundingClientRect();
+    var R = Math.max(88, Math.min(vw * 0.24, 175));
+    var cx = r.left + r.width * (vw < 720 ? 0.76 : 0.80);
+    var cy = r.top + Math.min(r.height * 0.32, vw < 720 ? 190 : 265);
+    if (cy < -R * 2 || cy > window.innerHeight + R * 2) return; // scrolled away
+
+    // pointer spin momentum, stronger near the orb
+    var pdx = px - cx, pdy = py - cy;
+    var near = Math.max(0, 1 - Math.hypot(pdx, pdy) / (R * 2.2));
+    vy += (px - lpx) * 0.00003 * (0.25 + near * 2.2);
+    vxr += (py - lpy) * 0.000012 * (0.25 + near * 2.2);
+    vy += (0.0022 - vy) * 0.01;    // ease back to idle spin
+    vxr += (0.0004 - vxr) * 0.015;
+    ay += vy; ax += vxr;
+
+    var cosY = Math.cos(ay), sinY = Math.sin(ay), cosX = Math.cos(ax), sinX = Math.sin(ax);
+    var FOV = 3.2;
+
+    for (var i = 0; i < NPTS; i++){
+      var p = pts[i];
+      var x1 = p.x * cosY + p.z * sinY, z1 = -p.x * sinY + p.z * cosY;
+      var y1 = p.y * cosX - z1 * sinX, z2 = p.y * sinX + z1 * cosX;
+      var per = FOV / (FOV + z2);
+      var sx = cx + x1 * R * per, sy = cy + y1 * R * per;
+      // deform: repel from pointer in screen space, spring home
+      var dx = sx + p.ox - px, dy = sy + p.oy - py;
+      var d2 = dx * dx + dy * dy, RAD = R * 1.15;
+      if (d2 < RAD * RAD){
+        var d = Math.sqrt(d2) || 1, f = (1 - d / RAD) * 3.2;
+        p.vx += (dx / d) * f; p.vy += (dy / d) * f;
+      }
+      p.vx += -p.ox * 0.06; p.vy += -p.oy * 0.06;
+      p.vx *= 0.86; p.vy *= 0.86;
+      p.ox += p.vx; p.oy += p.vy;
+      p.sx = sx + p.ox; p.sy = sy + p.oy;
+      p.s = per; p.d = (z2 + 1) / 2; // 0 front .. 1 back (z2 in [-1,1])
+    }
+    // constellation lines
+    ctx.lineWidth = 1;
+    for (i = 0; i < pairs.length; i++){
+      var a = pts[pairs[i][0]], b = pts[pairs[i][1]];
+      var la = 0.16 * (1 - (a.d + b.d) / 2);
+      if (la < 0.02) continue;
+      ctx.strokeStyle = 'rgba(64,225,205,' + la + ')';
+      ctx.beginPath(); ctx.moveTo(a.sx, a.sy); ctx.lineTo(b.sx, b.sy); ctx.stroke();
+    }
+    // points, back to front-ish by simple alpha/size on depth
+    for (i = 0; i < NPTS; i++){
+      var p2 = pts[i];
+      var depth = 1 - p2.d;
+      ctx.beginPath();
+      ctx.arc(p2.sx, p2.sy, 0.7 + depth * 1.9, 0, 6.2832);
+      ctx.fillStyle = depth > 0.62
+        ? 'rgba(150,252,235,' + (0.25 + depth * 0.6) + ')'
+        : 'rgba(64,225,205,' + (0.10 + depth * 0.45) + ')';
+      ctx.fill();
+    }
+    lpx = px; lpy = py;
+  }
+
+  window.addEventListener('pointermove', function(e){ px = e.clientX; py = e.clientY; }, { passive: true });
+  window.addEventListener('pointerdown', function(e){ px = e.clientX; py = e.clientY; lpx = px; lpy = py; }, { passive: true });
+  window.JADE_ORB_FRAME = orbFrame; // hooked into the flow-field loop
 })();
 </script>
 </body>
