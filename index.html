@@ -919,7 +919,6 @@
       if (t < 1) requestAnimationFrame(step);
       else el.textContent = target;
     }
-    if (window.JADE_ORB_FRAME) try { window.JADE_ORB_FRAME(); } catch(e) {}
     requestAnimationFrame(step);
   }
 
@@ -1027,6 +1026,7 @@
         : 'rgba(64,225,205,' + (p.a + v * .32) + ')';
       ctx.fill();
     }
+    if (window.JADE_ORB_FRAME) try { window.JADE_ORB_FRAME(); } catch(e) {}
     requestAnimationFrame(step);
   }
 
