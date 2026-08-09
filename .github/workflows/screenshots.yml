@@ -1,0 +1,54 @@
+# Visual verification loop. Sandboxed sessions that push here have no browser,
+# so every visual change ships blind. This job screenshots the LIVE site after
+# each Pages deploy and force-pushes the PNGs to a `shots` branch, where any
+# session can fetch them via raw.githubusercontent.com and actually look.
+name: Screenshot live site
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  shots:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait for Pages to serve this commit
+        run: |
+          for i in $(seq 1 20); do
+            status=$(curl -s -H "Authorization: Bearer ${{ github.token }}" \
+              https://api.github.com/repos/${{ github.repository }}/pages/builds/latest \
+              | python3 -c "import json,sys;d=json.load(sys.stdin);print(d.get('status'),d.get('commit'))")
+            echo "poll $i: $status"
+            case "$status" in "built ${{ github.sha }}") exit 0;; esac
+            sleep 15
+          done
+          echo "Pages never reported built for this SHA; screenshotting current live anyway."
+      - name: Screenshot
+        run: |
+          npm i -s playwright@1.54 >/dev/null 2>&1
+          npx playwright install --with-deps chromium >/dev/null 2>&1
+          node - <<'JS'
+          const { chromium } = require('playwright');
+          (async () => {
+            const b = await chromium.launch();
+            for (const [name, vp] of [['mobile',{width:390,height:844}],['desktop',{width:1440,height:900}]]) {
+              const p = await b.newPage({ viewport: vp });
+              await p.goto('https://kingithegreat.github.io', { waitUntil: 'networkidle' });
+              await p.waitForTimeout(2500); // let the canvas effects run
+              await p.screenshot({ path: name + '.png', fullPage: true });
+              await p.screenshot({ path: name + '-fold.png', fullPage: false });
+              await p.close();
+            }
+            await b.close();
+          })();
+          JS
+      - name: Push to shots branch
+        run: |
+          git config user.name "shots-bot"; git config user.email "actions@github.com"
+          git checkout --orphan shots
+          git rm -rfq . || true
+          git add -f mobile.png mobile-fold.png desktop.png desktop-fold.png
+          git commit -qm "shots for ${GITHUB_SHA:0:9}"
+          git push -f origin shots
