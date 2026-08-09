@@ -919,7 +919,7 @@
       if (t < 1) requestAnimationFrame(step);
       else el.textContent = target;
     }
-    if (window.JADE_ORB_FRAME) window.JADE_ORB_FRAME();
+    if (window.JADE_ORB_FRAME) try { window.JADE_ORB_FRAME(); } catch(e) {}
     requestAnimationFrame(step);
   }
 
@@ -1062,7 +1062,7 @@
 
   var NPTS = 300, pts = [], pairs = [];
   var ay = 0, ax = -0.35, vy = 0.0022, vxr = 0.0004;
-  var px = -1e4, py = -1e4, lpx = 0, lpy = 0;
+  var px = -1e4, py = -1e4, lpx = -1e4, lpy = -1e4;
 
   // fibonacci sphere
   var GA = Math.PI * (3 - Math.sqrt(5));
@@ -1097,8 +1097,10 @@
     // pointer spin momentum, stronger near the orb
     var pdx = px - cx, pdy = py - cy;
     var near = Math.max(0, 1 - Math.hypot(pdx, pdy) / (R * 2.2));
-    vy += (px - lpx) * 0.00003 * (0.25 + near * 2.2);
-    vxr += (py - lpy) * 0.000012 * (0.25 + near * 2.2);
+    if (px > -9999 && lpx > -9999){
+      vy += (px - lpx) * 0.00003 * (0.25 + near * 2.2);
+      vxr += (py - lpy) * 0.000012 * (0.25 + near * 2.2);
+    }
     vy += (0.0022 - vy) * 0.01;    // ease back to idle spin
     vxr += (0.0004 - vxr) * 0.015;
     ay += vy; ax += vxr;
@@ -1129,7 +1131,7 @@
     ctx.lineWidth = 1;
     for (i = 0; i < pairs.length; i++){
       var a = pts[pairs[i][0]], b = pts[pairs[i][1]];
-      var la = 0.16 * (1 - (a.d + b.d) / 2);
+      var la = 0.24 * (1 - (a.d + b.d) / 2);
       if (la < 0.02) continue;
       ctx.strokeStyle = 'rgba(64,225,205,' + la + ')';
       ctx.beginPath(); ctx.moveTo(a.sx, a.sy); ctx.lineTo(b.sx, b.sy); ctx.stroke();
@@ -1139,10 +1141,10 @@
       var p2 = pts[i];
       var depth = 1 - p2.d;
       ctx.beginPath();
-      ctx.arc(p2.sx, p2.sy, 0.7 + depth * 1.9, 0, 6.2832);
+      ctx.arc(p2.sx, p2.sy, 1.0 + depth * 2.2, 0, 6.2832);
       ctx.fillStyle = depth > 0.62
-        ? 'rgba(150,252,235,' + (0.25 + depth * 0.6) + ')'
-        : 'rgba(64,225,205,' + (0.10 + depth * 0.45) + ')';
+        ? 'rgba(160,255,240,' + (0.35 + depth * 0.6) + ')'
+        : 'rgba(70,230,210,' + (0.16 + depth * 0.5) + ')';
       ctx.fill();
     }
     lpx = px; lpy = py;
