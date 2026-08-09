@@ -1,0 +1,65 @@
+name: Visual verify
+# After every deploy, screenshot the LIVE site (desktop + mobile) and publish
+# the PNGs to the ci-screenshots branch so headless Claude sessions can SEE
+# the page via raw.githubusercontent.com instead of shipping visuals blind.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: visual-verify
+  cancel-in-progress: true
+
+jobs:
+  screenshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Pages to serve this commit
+        run: |
+          for i in $(seq 1 30); do
+            STATUS=$(curl -s "https://api.github.com/repos/${GITHUB_REPOSITORY}/pages/builds/latest" \
+              -H "Authorization: Bearer ${{ github.token }}" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('status'),d.get('commit'))")
+            echo "attempt $i: $STATUS (want: built ${GITHUB_SHA})"
+            case "$STATUS" in "built ${GITHUB_SHA}") exit 0;; esac
+            sleep 10
+          done
+          echo "Pages never reported built for this SHA; screenshotting whatever is live"
+
+      - name: Install Playwright Chromium
+        run: npx --yes playwright@1.49.1 install --with-deps chromium
+
+      - name: Screenshot live site
+        run: |
+          cat > shot.mjs <<'JS'
+          import { chromium } from 'playwright';
+          const url = 'https://kingithegreat.github.io/?ci=' + Date.now();
+          const browser = await chromium.launch();
+          for (const [name, vp] of [['desktop', {width:1440, height:900}], ['mobile', {width:390, height:844}]]) {
+            const page = await browser.newPage({ viewport: vp, deviceScaleFactor: 2 });
+            await page.goto(url, { waitUntil: 'networkidle' });
+            await page.waitForTimeout(2500); // let the canvas effects run
+            await page.screenshot({ path: name + '.png' });           // above the fold
+            await page.screenshot({ path: name + '-full.png', fullPage: true });
+            await page.close();
+          }
+          await browser.close();
+          JS
+          npx --yes playwright@1.49.1 run-server --help >/dev/null 2>&1 || true
+          node shot.mjs
+
+      - name: Publish to ci-screenshots branch (single-commit orphan)
+        run: |
+          mkdir out && mv desktop.png mobile.png desktop-full.png mobile-full.png out/
+          cd out
+          git init -q -b ci-screenshots
+          git config user.name "visual-verify[bot]"
+          git config user.email "actions@github.com"
+          echo "Latest live-site screenshots for ${GITHUB_SHA} ($(date -u +%FT%TZ))" > README.md
+          git add -A
+          git commit -q -m "screenshots for ${GITHUB_SHA}"
+          git push -q --force "https://x-access-token:${{ github.token }}@github.com/${GITHUB_REPOSITORY}.git" ci-screenshots
