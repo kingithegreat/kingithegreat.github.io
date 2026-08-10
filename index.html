@@ -18,7 +18,7 @@
 <meta property="og:locale" content="en_NZ">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://kingithegreat.github.io/og.png">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23FF8FD0'/><stop offset='1' stop-color='%237FE9F5'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='%23181352'/><text x='16' y='22' font-family='monospace' font-size='14' font-weight='700' text-anchor='middle' fill='url(%23g)'>AK</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%235CE0BE'/><stop offset='1' stop-color='%237FE9F5'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='%23181352'/><text x='16' y='22' font-family='monospace' font-size='14' font-weight='700' text-anchor='middle' fill='url(%23g)'>AK</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Schibsted+Grotesk:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -27,20 +27,20 @@
     /* Gion night palette */
     --deep:#141043;        /* deep indigo sky */
     --pool:#1F1A63;        /* upper night */
-    --jade:#FF8FD0;        /* sakura — primary accent */
+    --jade:#5CE0BE;        /* pathway aqua — primary accent */
     --fern:#7FE9F5;        /* lantern cyan — highlight */
     --mist:#EFEBFF;        /* text on deep */
     --moss:#ADA6E2;        /* muted text */
-    --ink:#1B1250;         /* text on sakura */
+    --ink:#0E2543;         /* text on aqua */
 
     --lilac:#8E8BE8;       /* periwinkle rooftops */
     --lamp:#FFD98A;        /* paper-lantern yellow */
-    --blossom:#FFC2E6;     /* pale petal */
+    --blossom:#9CF0DA;     /* pale aqua */
 
     --glass:rgba(255,255,255,.06);
     --glass-strong:rgba(255,255,255,.095);
     --edge:rgba(160,206,255,.20);
-    --edge-bright:rgba(255,143,208,.44);
+    --edge-bright:rgba(92,224,190,.44);
 
     --display:"Bricolage Grotesque",system-ui,sans-serif;
     --body:"Schibsted Grotesk",system-ui,sans-serif;
@@ -103,7 +103,7 @@
       linear-gradient(180deg, rgba(11,8,40,.44) 0%, rgba(11,8,40,.20) 42%, rgba(11,8,40,.62) 100%),
       radial-gradient(112% 58% at 50% 118%, rgba(74,168,190,.26), transparent 62%),
       radial-gradient(62% 42% at 76% 4%, rgba(255,216,150,.09), transparent 64%),
-      radial-gradient(74% 50% at 12% 72%, rgba(255,143,208,.07), transparent 68%),
+      radial-gradient(74% 50% at 12% 72%, rgba(92,224,190,.07), transparent 68%),
       linear-gradient(178deg,#100C3A 0%,#171253 34%,#1D2170 62%,#1F3C7E 84%,#215687 100%);
   }
 
@@ -281,7 +281,7 @@
   .nav .cv:hover{
     background:var(--fern);
     transform:translateY(-1px);
-    box-shadow:0 8px 22px rgba(255,143,208,.40);
+    box-shadow:0 8px 22px rgba(92,224,190,.40);
   }
   .nav .cv:active{transform:none;box-shadow:none}
   @media (max-width:720px){
@@ -376,7 +376,7 @@
     border-radius:22px;
     border:1px solid var(--edge-bright);
     background:var(--glass-strong);
-    box-shadow:0 18px 48px rgba(0,0,0,.38), 0 0 0 4px rgba(255,143,208,.18), inset 0 1px 0 rgba(255,255,255,.10);
+    box-shadow:0 18px 48px rgba(0,0,0,.38), 0 0 0 4px rgba(92,224,190,.20), inset 0 1px 0 rgba(255,255,255,.10);
   }
   @media (max-width:520px){
     .bio{gap:16px}
@@ -404,7 +404,7 @@
     border:1px solid transparent;
     transition:transform .15s ease,box-shadow .15s ease,background .15s ease;
   }
-  .btn:hover{background:var(--blossom);transform:translateY(-2px);box-shadow:0 10px 28px rgba(255,143,208,.42)}
+  .btn:hover{background:var(--blossom);transform:translateY(-2px);box-shadow:0 10px 28px rgba(92,224,190,.42)}
   .btn:active{transform:none;box-shadow:none}
   .btn.ghost{
     background:var(--glass);
@@ -584,11 +584,11 @@
     .tile{position:relative;overflow:hidden}
     .tile::after{
       content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-      background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%),rgba(255,143,208,.16),transparent 65%);
+      background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%),rgba(92,224,190,.18),transparent 65%);
       opacity:0;transition:opacity .25s ease;
     }
     .tile:hover::after{opacity:1}
-    .job.tile:hover{translate:0 -4px;border-color:rgba(255,143,208,.50)}
+    .job.tile:hover{translate:0 -4px;border-color:rgba(92,224,190,.52)}
     .job.tile{transition:translate .25s ease,border-color .25s ease}
   }
 
@@ -678,7 +678,7 @@
   }
   .linkcards a::before{
     content:"";position:absolute;inset:0;
-    background:linear-gradient(120deg,rgba(255,143,208,.16),rgba(127,233,245,.16));
+    background:linear-gradient(120deg,rgba(92,224,190,.17),rgba(127,233,245,.15));
     opacity:0;transition:opacity .25s ease;
   }
   .linkcards a > *{position:relative}
@@ -1159,7 +1159,7 @@
       vx: 0, vy: 0,
       r: .6 + Math.random() * 1.5,
       a: .16 + Math.random() * .34,
-      hue: Math.random() < .90 ? 0 : 1, // 0 lantern cyan, 1 sakura fleck
+      hue: Math.random() < .90 ? 0 : 1, // 0 lantern cyan, 1 aqua fleck
       life: 400 + Math.random() * 900
     };
   }
@@ -1197,7 +1197,7 @@
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r + v * 1.2, 0, 6.2832);
       ctx.fillStyle = p.hue
-        ? 'rgba(255,171,220,' + (p.a * .8 + v * .28) + ')'
+        ? 'rgba(140,240,214,' + (p.a * .8 + v * .28) + ')'
         : 'rgba(168,214,240,' + (p.a * .78 + v * .26) + ')';
       ctx.fill();
     }
@@ -1318,7 +1318,7 @@
       ctx.beginPath();
       ctx.arc(p2.sx, p2.sy, 1.0 + depth * 2.2, 0, 6.2832);
       ctx.fillStyle = depth > 0.62
-        ? 'rgba(255,194,230,' + (0.30 + depth * 0.46) + ')'
+        ? 'rgba(156,240,218,' + (0.30 + depth * 0.46) + ')'
         : 'rgba(158,214,242,' + (0.14 + depth * 0.42) + ')';
       ctx.fill();
     }
