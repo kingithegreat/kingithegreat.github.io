@@ -6,7 +6,7 @@
 <title>Aden Kingi — Software Developer, Tauranga NZ</title>
 <meta name="description" content="Software developer in Tauranga, New Zealand. Bachelor of Applied Information Technology, 92% average. Builds desktop AI tooling, web apps and games — 27 repositories, two products live.">
 <meta name="author" content="Aden Kingi">
-<meta name="theme-color" content="#081712">
+<meta name="theme-color" content="#141043">
 <link rel="canonical" href="https://kingithegreat.github.io/">
 <meta property="og:title" content="Aden Kingi — Software Developer">
 <meta property="og:description" content="Tauranga, New Zealand. 27 repositories, nine games, one AI desktop assistant, two products live.">
@@ -18,25 +18,29 @@
 <meta property="og:locale" content="en_NZ">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://kingithegreat.github.io/og.png">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23081712'/><text x='16' y='22' font-family='monospace' font-size='14' font-weight='700' text-anchor='middle' fill='%2334C68C'>AK</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%235CE0BE'/><stop offset='1' stop-color='%237FE9F5'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='%23181352'/><text x='16' y='22' font-family='monospace' font-size='14' font-weight='700' text-anchor='middle' fill='url(%23g)'>AK</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Schibsted+Grotesk:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    /* Pounamu palette */
-    --deep:#081712;        /* riverbed */
-    --pool:#0C231A;        /* deep pool */
-    --jade:#34C68C;        /* polished pounamu */
-    --fern:#8FE3BC;        /* fern highlight */
-    --mist:#DCEBE2;        /* text on deep */
-    --moss:#9DB5A8;        /* muted text */
-    --ink:#06130D;         /* text on jade */
+    /* Gion night palette */
+    --deep:#141043;        /* deep indigo sky */
+    --pool:#1F1A63;        /* upper night */
+    --jade:#5CE0BE;        /* pathway aqua — primary accent */
+    --fern:#7FE9F5;        /* lantern cyan — highlight */
+    --mist:#EFEBFF;        /* text on deep */
+    --moss:#ADA6E2;        /* muted text */
+    --ink:#0E2543;         /* text on aqua */
 
-    --glass:rgba(255,255,255,.055);
-    --glass-strong:rgba(255,255,255,.085);
-    --edge:rgba(143,227,188,.16);
-    --edge-bright:rgba(143,227,188,.34);
+    --lilac:#8E8BE8;       /* periwinkle rooftops */
+    --lamp:#FFD98A;        /* paper-lantern yellow */
+    --blossom:#9CF0DA;     /* pale aqua */
+
+    --glass:rgba(255,255,255,.06);
+    --glass-strong:rgba(255,255,255,.095);
+    --edge:rgba(160,206,255,.20);
+    --edge-bright:rgba(92,224,190,.44);
 
     --display:"Bricolage Grotesque",system-ui,sans-serif;
     --body:"Schibsted Grotesk",system-ui,sans-serif;
@@ -87,7 +91,7 @@
     z-index:-1;
     width:100vw;height:100vh;
     pointer-events:none;
-    opacity:.7;
+    opacity:.55;
     mix-blend-mode:screen;
   }
 
@@ -96,38 +100,104 @@
     z-index:-1;
     overflow:hidden;
     background:
-      radial-gradient(60% 50% at 85% 8%, rgba(52,198,140,.13), transparent 65%),
-      radial-gradient(50% 45% at 10% 30%, rgba(24,110,80,.20), transparent 70%),
-      radial-gradient(70% 60% at 50% 105%, rgba(12,45,32,.9), transparent 70%),
-      var(--deep);
+      linear-gradient(180deg, rgba(11,8,40,.44) 0%, rgba(11,8,40,.20) 42%, rgba(11,8,40,.62) 100%),
+      radial-gradient(112% 58% at 50% 118%, rgba(74,168,190,.26), transparent 62%),
+      radial-gradient(62% 42% at 76% 4%, rgba(255,216,150,.09), transparent 64%),
+      radial-gradient(74% 50% at 12% 72%, rgba(92,224,190,.07), transparent 68%),
+      linear-gradient(178deg,#100C3A 0%,#171253 34%,#1D2170 62%,#1F3C7E 84%,#215687 100%);
   }
+
+  /* starfield */
+  .aurora::before{
+    content:"";position:absolute;inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cg fill='%23ffffff'%3E%3Ccircle cx='24' cy='38' r='1.1'/%3E%3Ccircle cx='97' cy='16' r='.8'/%3E%3Ccircle cx='158' cy='71' r='1.3'/%3E%3Ccircle cx='233' cy='29' r='.9'/%3E%3Ccircle cx='291' cy='96' r='1'/%3E%3Ccircle cx='58' cy='131' r='1.2'/%3E%3Ccircle cx='131' cy='167' r='.8'/%3E%3Ccircle cx='201' cy='140' r='1.1'/%3E%3Ccircle cx='268' cy='188' r='.9'/%3E%3Ccircle cx='17' cy='214' r='1'/%3E%3Ccircle cx='88' cy='253' r='1.25'/%3E%3Ccircle cx='176' cy='232' r='.85'/%3E%3Ccircle cx='247' cy='276' r='1.05'/%3E%3Ccircle cx='306' cy='245' r='.8'/%3E%3Ccircle cx='120' cy='300' r='1'/%3E%3C/g%3E%3C/svg%3E");
+    background-size:clamp(240px,26vw,340px) clamp(240px,26vw,340px);
+    opacity:.42;
+    -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 46%,transparent 82%);
+    mask-image:linear-gradient(180deg,#000 0%,#000 46%,transparent 82%);
+    animation:twinkle 7s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle{from{opacity:.26}to{opacity:.52}}
+
+  /* sky grid — fades out below the horizon */
+  .aurora::after{
+    content:"";position:absolute;inset:-2px;
+    background-image:
+      linear-gradient(rgba(198,206,255,.085) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(198,206,255,.085) 1px,transparent 1px);
+    background-size:clamp(64px,8.5vw,112px) clamp(64px,8.5vw,112px);
+    -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 40%,transparent 76%);
+    mask-image:linear-gradient(180deg,#000 0%,#000 40%,transparent 76%);
+  }
+
+  /* crescent moon */
+  .moon{
+    position:absolute;
+    z-index:-1;
+    top:clamp(46px,7vh,86px);
+    right:clamp(18px,3.4vw,54px);
+    width:clamp(44px,5vw,66px);
+    aspect-ratio:1;border-radius:50%;
+    box-shadow:inset -15px 6px 0 0 rgba(255,217,138,.80), 0 0 46px 10px rgba(255,226,152,.11);
+    animation:moonglow 11s ease-in-out infinite alternate;
+  }
+  @keyframes moonglow{
+    from{box-shadow:inset -15px 6px 0 0 rgba(255,217,138,.80), 0 0 38px 8px rgba(255,226,152,.08)}
+    to{box-shadow:inset -15px 6px 0 0 rgba(255,217,138,.80), 0 0 60px 15px rgba(255,226,152,.17)}
+  }
+
+  /* soft colour wash */
   .aurora i{
     position:absolute;
     border-radius:50%;
     filter:blur(90px);
-    opacity:.5;
+    opacity:.38;
     will-change:transform;
   }
-  .aurora i:nth-child(1){
+  .aurora i:nth-of-type(1){
     width:44vw;height:44vw;min-width:320px;min-height:320px;
-    left:-10vw;top:-14vw;
-    background:radial-gradient(circle at 40% 40%, rgba(52,198,140,.32), transparent 70%);
+    left:-10vw;top:-12vw;
+    background:radial-gradient(circle at 40% 40%, rgba(126,124,206,.30), transparent 70%);
     animation:drift1 26s ease-in-out infinite alternate;
   }
-  .aurora i:nth-child(2){
+  .aurora i:nth-of-type(2){
     width:38vw;height:38vw;min-width:280px;min-height:280px;
-    right:-8vw;top:18vh;
-    background:radial-gradient(circle at 60% 40%, rgba(143,227,188,.16), transparent 70%);
+    right:-8vw;top:16vh;
+    background:radial-gradient(circle at 60% 40%, rgba(150,146,224,.26), transparent 70%);
     animation:drift2 34s ease-in-out infinite alternate;
   }
-  .aurora i:nth-child(3){
+  .aurora i:nth-of-type(3){
     width:52vw;height:32vw;min-width:340px;min-height:240px;
-    left:16vw;bottom:-16vw;
-    background:radial-gradient(circle at 50% 50%, rgba(27,94,67,.4), transparent 70%);
+    left:14vw;bottom:-16vw;
+    background:radial-gradient(circle at 50% 50%, rgba(110,186,214,.26), transparent 70%);
     animation:drift1 40s ease-in-out infinite alternate-reverse;
   }
   @keyframes drift1{from{transform:translate(0,0) scale(1)}to{transform:translate(6vw,4vh) scale(1.12)}}
   @keyframes drift2{from{transform:translate(0,0) scale(1.08)}to{transform:translate(-5vw,6vh) scale(.96)}}
+
+  /* bokeh — crisp pastel orbs, as in the reference */
+  .bok{
+    position:absolute;border-radius:50%;
+    pointer-events:none;
+    filter:blur(.5px);
+    will-change:transform;
+  }
+  .bok.b1{width:190px;height:190px;left:6vw;top:12vh;
+    background:radial-gradient(circle at 34% 30%, rgba(255,244,214,.17), rgba(255,214,176,.05) 62%, transparent 74%);
+    animation:float1 19s ease-in-out infinite alternate}
+  .bok.b2{width:126px;height:126px;right:9vw;top:6vh;
+    background:radial-gradient(circle at 36% 32%, rgba(224,214,255,.16), rgba(196,180,255,.05) 60%, transparent 74%);
+    animation:float2 24s ease-in-out infinite alternate}
+  .bok.b3{width:154px;height:154px;left:38vw;bottom:14vh;
+    background:radial-gradient(circle at 34% 30%, rgba(255,255,255,.13), rgba(196,226,255,.04) 60%, transparent 74%);
+    animation:float1 27s ease-in-out infinite alternate-reverse}
+  .bok.b4,.bok.b5{display:none}
+  @keyframes float1{from{transform:translate(0,0)}to{transform:translate(2.4vw,-3.2vh)}}
+  @keyframes float2{from{transform:translate(0,0)}to{transform:translate(-2.8vw,2.6vh)}}
+  @media (max-width:720px){
+    .bok.b3{display:none}
+    .bok{filter:blur(1px)}
+  }
 
   /* ---------- Scroll progress ---------- */
   .feed{
@@ -155,7 +225,7 @@
     .tile{-webkit-backdrop-filter:blur(12px) saturate(1.15);backdrop-filter:blur(12px) saturate(1.15)}
   }
   @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
-    .tile{background:rgba(16,38,29,.82)}
+    .tile{background:rgba(31,26,99,.84)}
   }
 
   /* ---------- Nav ---------- */
@@ -193,7 +263,7 @@
     white-space:nowrap;
     transition:background .15s ease,color .15s ease;
   }
-  .nav a.link:hover{background:rgba(143,227,188,.12);color:var(--fern)}
+  .nav a.link:hover{background:rgba(127,233,245,.14);color:var(--fern)}
   .nav .cv{
     font-family:var(--data);
     font-size:12.5px;
@@ -211,7 +281,7 @@
   .nav .cv:hover{
     background:var(--fern);
     transform:translateY(-1px);
-    box-shadow:0 8px 22px rgba(52,198,140,.35);
+    box-shadow:0 8px 22px rgba(92,224,190,.40);
   }
   .nav .cv:active{transform:none;box-shadow:none}
   @media (max-width:720px){
@@ -306,7 +376,7 @@
     border-radius:22px;
     border:1px solid var(--edge-bright);
     background:var(--glass-strong);
-    box-shadow:0 18px 48px rgba(0,0,0,.35), 0 0 0 4px rgba(52,198,140,.12), inset 0 1px 0 rgba(255,255,255,.07);
+    box-shadow:0 18px 48px rgba(0,0,0,.38), 0 0 0 4px rgba(92,224,190,.20), inset 0 1px 0 rgba(255,255,255,.10);
   }
   @media (max-width:520px){
     .bio{gap:16px}
@@ -334,14 +404,14 @@
     border:1px solid transparent;
     transition:transform .15s ease,box-shadow .15s ease,background .15s ease;
   }
-  .btn:hover{background:var(--fern);transform:translateY(-2px);box-shadow:0 10px 26px rgba(52,198,140,.32)}
+  .btn:hover{background:var(--blossom);transform:translateY(-2px);box-shadow:0 10px 28px rgba(92,224,190,.42)}
   .btn:active{transform:none;box-shadow:none}
   .btn.ghost{
     background:var(--glass);
     color:var(--mist);
     border:1px solid var(--edge);
   }
-  .btn.ghost:hover{background:rgba(143,227,188,.1);color:var(--fern);box-shadow:none}
+  .btn.ghost:hover{background:rgba(127,233,245,.12);color:var(--fern);border-color:rgba(127,233,245,.42);box-shadow:0 10px 28px rgba(127,233,245,.20)}
 
   /* ---------- Sections ---------- */
   section{padding:0 0 var(--stack)}
@@ -514,11 +584,11 @@
     .tile{position:relative;overflow:hidden}
     .tile::after{
       content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-      background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%),rgba(52,198,140,.13),transparent 65%);
+      background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%),rgba(92,224,190,.18),transparent 65%);
       opacity:0;transition:opacity .25s ease;
     }
     .tile:hover::after{opacity:1}
-    .job.tile:hover{translate:0 -4px;border-color:rgba(52,198,140,.45)}
+    .job.tile:hover{translate:0 -4px;border-color:rgba(92,224,190,.52)}
     .job.tile{transition:translate .25s ease,border-color .25s ease}
   }
 
@@ -545,8 +615,107 @@
     background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  .edu-docs a{color:var(--fern);text-decoration-color:rgba(143,227,188,.35);text-underline-offset:3px}
-  .edu-docs a:hover{color:var(--jade)}
+  /* ---------- Link panels ---------- */
+  .doclinks{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(178px,1fr));
+    gap:10px;
+    margin:auto 0 0;
+    padding:16px 0 0;
+    border-top:1px solid var(--edge);
+  }
+  .doclinks a{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    text-decoration:none;
+    padding:13px 15px;
+    border-radius:14px;
+    background:var(--glass-strong);
+    border:1px solid var(--edge);
+    color:var(--mist);
+    font-size:13.5px;
+    line-height:1.3;
+    transition:transform .18s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease;
+  }
+  .doclinks a:hover{
+    transform:translateY(-2px);
+    background:rgba(127,233,245,.12);
+    border-color:rgba(127,233,245,.45);
+    color:var(--fern);
+    box-shadow:0 10px 24px rgba(20,16,67,.45);
+  }
+  .doclinks a:active{transform:none;box-shadow:none}
+  .doclinks .dl-x{
+    font-family:var(--data);
+    font-size:9.5px;
+    letter-spacing:.14em;
+    padding:3px 8px;
+    border-radius:999px;
+    border:1px solid var(--edge-bright);
+    color:var(--jade);
+    flex:0 0 auto;
+  }
+  .doclinks a:hover .dl-x{border-color:var(--fern);color:var(--fern)}
+
+  .linkcards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:12px;
+  }
+  .linkcards a{
+    position:relative;
+    display:block;
+    text-decoration:none;
+    padding:20px 22px;
+    border-radius:18px;
+    background:var(--glass-strong);
+    border:1px solid var(--edge);
+    color:var(--mist);
+    overflow:hidden;
+    transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+  }
+  .linkcards a::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(120deg,rgba(92,224,190,.17),rgba(127,233,245,.15));
+    opacity:0;transition:opacity .25s ease;
+  }
+  .linkcards a > *{position:relative}
+  .linkcards a:hover{
+    transform:translateY(-3px);
+    border-color:var(--edge-bright);
+    box-shadow:0 16px 36px rgba(20,16,67,.5);
+  }
+  .linkcards a:hover::before{opacity:1}
+  .linkcards a:active{transform:none}
+  .linkcards .lc-k{
+    display:block;
+    font-family:var(--data);
+    font-size:10px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--moss);
+    margin-bottom:9px;
+  }
+  .linkcards .lc-v{
+    display:block;
+    font-family:var(--display);
+    font-weight:700;
+    font-size:16.5px;
+    letter-spacing:-.008em;
+    line-height:1.25;
+    word-break:break-word;
+  }
+  .linkcards .lc-go{
+    display:inline-block;
+    margin-top:12px;
+    font-family:var(--data);
+    font-size:12.5px;
+    color:var(--jade);
+    transition:transform .2s ease,color .2s ease;
+  }
+  .linkcards a:hover .lc-go{transform:translateX(5px);color:var(--fern)}
   .contact .tile{padding:clamp(30px,5vw,48px)}
   .contact h2{
     font-family:var(--display);
@@ -561,18 +730,6 @@
     color:transparent;
   }
   .contact > .wrap > .tile > p{max-width:58ch;margin:0 0 24px}
-  .links{display:flex;flex-wrap:wrap;gap:12px}
-  .links a{
-    font-family:var(--data);
-    font-size:13px;
-    text-decoration:none;
-    padding:12px 20px;
-    border-radius:999px;
-    background:var(--glass-strong);
-    border:1px solid var(--edge);
-    transition:background .15s ease,color .15s ease,border-color .15s ease;
-  }
-  .links a:hover{background:rgba(143,227,188,.12);color:var(--fern);border-color:var(--edge-bright)}
   .colophon{
     margin:28px 0 0;
     font-family:var(--data);
@@ -621,7 +778,8 @@
       opacity:1!important;
       transform:none!important;
     }
-    .feed,.aurora i{display:none}
+    .feed,.aurora i,.bok,.moon{display:none}
+    .aurora::before,.aurora::after{animation:none}
   }
 
   @media print{
@@ -630,12 +788,13 @@
     .tile{background:#fff;border-color:#ccc;box-shadow:none}
     .spec dd,.method h3,.history h3,.stack{color:#000}
     .contact h2{color:#000;background:none;-webkit-text-fill-color:initial}
-    .links a{color:#000}
+    .linkcards a,.doclinks a{color:#000;border-color:#ccc;background:#fff}
   }
 </style>
 </head>
 <body>
-<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i><span class="bok b1"></span><span class="bok b2"></span><span class="bok b3"></span><span class="bok b4"></span><span class="bok b5"></span></div>
+<span class="moon" aria-hidden="true"></span>
 <canvas id="current" aria-hidden="true"></canvas>
 <div class="grain" aria-hidden="true"></div>
 <div class="feed" aria-hidden="true"></div>
@@ -791,7 +950,11 @@
         <li><span>Special Topic</span><span>96 · A+</span></li>
         <li><span>Human-Computer Interaction</span><span>90 · A+</span></li>
       </ul>
-      <p class="stack edu-docs">Verify: <a href="docs/toi-ohomai-confirmation.pdf">confirmation letter (PDF)</a> · <a href="docs/toi-ohomai-results.pdf">full academic results (PDF)</a> · <a href="docs/toi-ohomai-commendation.pdf">staff commendation (PDF)</a></p>
+      <div class="doclinks">
+        <a href="docs/toi-ohomai-confirmation.pdf">Confirmation letter <span class="dl-x">PDF</span></a>
+        <a href="docs/toi-ohomai-results.pdf">Academic results <span class="dl-x">PDF</span></a>
+        <a href="docs/toi-ohomai-commendation.pdf">Staff commendation <span class="dl-x">PDF</span></a>
+      </div>
     </article>
 
     <article class="job tile b2">
@@ -865,10 +1028,22 @@
     <div class="tile">
       <h2>Let's talk</h2>
       <p>I'm looking for a graduate or junior developer role in the Bay of Plenty, or remote within New Zealand. Happy to walk through any of the code above.</p>
-      <div class="links">
-        <a href="mailto:adenkingi@hotmail.com">adenkingi@hotmail.com</a>
-        <a href="https://github.com/kingithegreat">github.com/kingithegreat</a>
-        <a href="cv/aden-kingi-cv.pdf">Download CV (PDF)</a>
+      <div class="linkcards">
+        <a href="mailto:adenkingi@hotmail.com">
+          <span class="lc-k">Email</span>
+          <span class="lc-v">adenkingi@hotmail.com</span>
+          <span class="lc-go">Send a message →</span>
+        </a>
+        <a href="https://github.com/kingithegreat">
+          <span class="lc-k">Code</span>
+          <span class="lc-v">github.com/kingithegreat</span>
+          <span class="lc-go">27 repositories →</span>
+        </a>
+        <a href="cv/aden-kingi-cv.pdf" download>
+          <span class="lc-k">Résumé</span>
+          <span class="lc-v">Download CV</span>
+          <span class="lc-go">PDF, one page →</span>
+        </a>
       </div>
       <p class="colophon">Aden Kingi · Tauranga, New Zealand · Built by hand, no framework, one file.</p>
     </div>
@@ -951,8 +1126,8 @@
 })();
 </script>
 <script>
-/* Jade current — hand-rolled canvas flow field, zero dependencies.
-   Particles drift like sediment in a river; your finger or cursor stirs the water. */
+/* Night current — hand-rolled canvas flow field, zero dependencies.
+   Particles drift like petals on the evening air; your finger or cursor stirs them. */
 (function(){
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var cv = document.getElementById('current');
@@ -984,7 +1159,7 @@
       vx: 0, vy: 0,
       r: .6 + Math.random() * 1.5,
       a: .16 + Math.random() * .34,
-      hue: Math.random() < .8 ? 0 : 1, // 0 jade, 1 fern
+      hue: Math.random() < .90 ? 0 : 1, // 0 lantern cyan, 1 aqua fleck
       life: 400 + Math.random() * 900
     };
   }
@@ -1022,8 +1197,8 @@
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r + v * 1.2, 0, 6.2832);
       ctx.fillStyle = p.hue
-        ? 'rgba(140,250,232,' + (p.a + v * .34) + ')'
-        : 'rgba(64,225,205,' + (p.a + v * .32) + ')';
+        ? 'rgba(140,240,214,' + (p.a * .8 + v * .28) + ')'
+        : 'rgba(168,214,240,' + (p.a * .78 + v * .26) + ')';
       ctx.fill();
     }
     if (window.JADE_ORB_FRAME) try { window.JADE_ORB_FRAME(); } catch(e) {}
@@ -1051,7 +1226,7 @@
 })();
 </script>
 <script>
-/* Aqua orb — hand-rolled 3D particle sphere on the same canvas, zero dependencies.
+/* Lantern orb — hand-rolled 3D particle sphere on the same canvas, zero dependencies.
    Idle: slow rotation. Pointer near it: spins with your drag and deforms, springs back. */
 (function(){
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -1133,7 +1308,7 @@
       var a = pts[pairs[i][0]], b = pts[pairs[i][1]];
       var la = 0.24 * (1 - (a.d + b.d) / 2);
       if (la < 0.02) continue;
-      ctx.strokeStyle = 'rgba(64,225,205,' + la + ')';
+      ctx.strokeStyle = 'rgba(150,214,240,' + la * .8 + ')';
       ctx.beginPath(); ctx.moveTo(a.sx, a.sy); ctx.lineTo(b.sx, b.sy); ctx.stroke();
     }
     // points, back to front-ish by simple alpha/size on depth
@@ -1143,8 +1318,8 @@
       ctx.beginPath();
       ctx.arc(p2.sx, p2.sy, 1.0 + depth * 2.2, 0, 6.2832);
       ctx.fillStyle = depth > 0.62
-        ? 'rgba(160,255,240,' + (0.35 + depth * 0.6) + ')'
-        : 'rgba(70,230,210,' + (0.16 + depth * 0.5) + ')';
+        ? 'rgba(156,240,218,' + (0.30 + depth * 0.46) + ')'
+        : 'rgba(158,214,242,' + (0.14 + depth * 0.42) + ')';
       ctx.fill();
     }
     lpx = px; lpy = py;
