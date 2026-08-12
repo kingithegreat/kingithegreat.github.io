@@ -1,0 +1,126 @@
+{
+  "owner": "kingithegreat",
+  "note": "Public proof-of-work page. ONLY repos listed here are rendered - nothing is discovered automatically, so a new private repo can never leak onto the public site by accident. `live` must be a URL a stranger can actually open and land on THIS project today - not a platform homepage, not a search page. If you do not have the exact URL, omit the field; a wrong link is worse than no link. Add the Roblox place URLs here once the store pages go up.",
+  "groups": [
+    {
+      "id": "games",
+      "title": "Roblox games",
+      "blurb": "{games} games, one shared CI platform. Each is a Rojo/Luau project whose game logic lives in a single engine-free module, so the whole rules layer runs and is tested on a plain CLI with no Roblox in the loop. Built, tested and published headlessly — no Studio in the pipeline.",
+      "repos": [
+        {
+          "name": "gym-simulator",
+          "tests": "src",
+          "what": "Gym progression sim — training rigs, zones, basketball park, rebirth and ascension. The largest of the nine."
+        },
+        {
+          "name": "vacuum-palace",
+          "tests": "src",
+          "what": "Collection sim — clear rooms, unlock palace wings, pets, prestige floors."
+        },
+        {
+          "name": "night-shift",
+          "tests": "src",
+          "what": "Co-op horror. Work a graveyard shift at a small dairy while a presence escalates. Published and running; store page pending."
+        },
+        {
+          "name": "tactical-command-rbx",
+          "tests": "src",
+          "what": "Turn-based squad tactics — the Roblox port of the web game below."
+        },
+        {
+          "name": "dig-site",
+          "tests": "src",
+          "what": "Archaeology sim — dig, clean carefully, sell, prestige across six sites."
+        },
+        {
+          "name": "scrap-empire",
+          "tests": "src",
+          "what": "Junkyard automation tycoon with steal-and-defend raiding on a shared map."
+        },
+        {
+          "name": "tower-together",
+          "tests": "src",
+          "what": "Community-built obby — one shared tower, climb it then build the next floor."
+        },
+        {
+          "name": "cauldron-corner",
+          "tests": "src",
+          "what": "Cozy potion shop — gather, brew, fill orders. No combat, no fail states."
+        },
+        {
+          "name": "bolt-brawlers",
+          "tests": "src",
+          "what": "Auto-battler — assemble a bot, fight escalating waves, overclock to prestige."
+        }
+      ]
+    },
+    {
+      "id": "platform",
+      "title": "Platform & tooling",
+      "blurb": "The part that makes {games} games maintainable by one person. A change to the pipeline ships once, not {games} times.",
+      "repos": [
+        {
+          "name": "roblox-ci",
+          "what": "Shared reusable CI and headless publish workflow every game calls. Compile gate, CLI test run, place build, Open Cloud publish with retry and verifiable outcomes. Carries the portfolio's written engineering contract."
+        },
+        {
+          "name": "mission-control",
+          "what": "Ops dashboard that rebuilds itself from the GitHub API every morning and commits the result — repo state, CI, open work."
+        },
+        {
+          "name": "bench-mcp",
+          "what": "Personal MCP server on Cloud Run — GitHub tooling with the token held server-side and a hard guard against pushing to any branch that deploys to production."
+        },
+        {
+          "name": "yt-dlp-mcp",
+          "what": "Standalone MCP server exposing video download and metadata as tools for any MCP client."
+        },
+        {
+          "name": "site-template",
+          "what": "Scaffold for the website pipeline — single-file site plus an automated screenshot verification loop."
+        }
+      ]
+    },
+    {
+      "id": "web",
+      "title": "Web & product",
+      "blurb": "Things with users, or one step from them.",
+      "repos": [
+        {
+          "name": "comand",
+          "what": "Turn-based squad tactics in the browser — campaign, online matchmaking, Elo, offline-capable PWA.",
+          "live": "https://comand.vercel.app"
+        },
+        {
+          "name": "bussnessbuilder",
+          "what": "BusinessFlow — a shopfront builder. Angular, containerised, deployed on Cloud Run with Stripe billing."
+        },
+        {
+          "name": "pyespa-lawncare-demo",
+          "what": "Live showcase site built on BusinessFlow for a Tauranga lawn-care business.",
+          "live": "https://kingithegreat.github.io/pyespa-lawncare-demo/"
+        },
+        {
+          "name": "kingithegreat.github.io",
+          "what": "This site. Hand-rolled — no framework, no dependencies; the background field and orb are plain canvas.",
+          "live": "https://kingithegreat.github.io/"
+        }
+      ]
+    }
+  ],
+  "highlights": [
+    {
+      "label": "Engine-free game logic",
+      "body": "Every game's rules live in one module with zero Roblox API calls, so the entire logic layer runs under a plain Luau CLI. That is what makes a headless pipeline possible: the tests below run in CI in seconds, with no editor and no game client."
+    },
+    {
+      "label": "A written contract, not conventions",
+      "body": "The portfolio has a single canonical engineering contract covering architecture invariants, the local CI mirror, and which operations require a human. Every repo points at it instead of restating it."
+    },
+    {
+      "label": "Publishing is a guarded operation",
+      "body": "Pushing to main on a live game deploys to players, so agents and tooling branch and open a pull request; a human merges. The MCP server enforces the same rule server-side."
+    }
+  ],
+  "intro": "The interesting part of this portfolio is not any single project — it is that one person can keep {games} games and a desktop app moving at once. That comes down to three decisions."
+}

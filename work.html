@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proof of Work — Aden Kingi</title>
+<meta name="description" content="A live, self-updating record of what Aden Kingi has actually shipped: 18 projects, 692 automated tests, 9 games on a shared CI platform. Rebuilt from the GitHub API every morning.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://kingithegreat.github.io/work.html">
+<meta property="og:title" content="Proof of Work — Aden Kingi">
+<meta property="og:description" content="18 projects, 692 automated tests, 9 games on one shared CI platform. This page rebuilds itself daily from the GitHub API.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kingithegreat.github.io/work.html">
+<meta property="og:image" content="https://kingithegreat.github.io/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#141043">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Schibsted+Grotesk:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep:#141043; --pool:#1F1A63; --jade:#5CE0BE; --fern:#7FE9F5;
+  --mist:#EFEBFF; --moss:#ADA6E2; --lamp:#FFD98A;
+  --glass:rgba(255,255,255,.06); --glass-strong:rgba(255,255,255,.095);
+  --edge:rgba(160,206,255,.20); --edge-bright:rgba(92,224,190,.44);
+  --display:"Bricolage Grotesque",system-ui,sans-serif;
+  --body:"Schibsted Grotesk",system-ui,sans-serif;
+  --data:"Spline Sans Mono",ui-monospace,monospace;
+  --r:26px; --gutter:clamp(20px,5vw,72px);
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:96px}  /* sticky nav is ~76px + breathing room */
+body{
+  margin:0; background:var(--deep); color:var(--mist); font-family:var(--body);
+  line-height:1.6; -webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(1100px 620px at 12% -8%, rgba(92,224,190,.12), transparent 62%),
+    radial-gradient(900px 560px at 88% 4%, rgba(127,233,245,.10), transparent 60%);
+  background-attachment:fixed;
+}
+a{color:var(--jade)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 var(--gutter)}
+.tile{
+  background:var(--glass); border:1px solid var(--edge); border-radius:var(--r);
+  backdrop-filter:blur(10px);
+}
+.nav{
+  display:flex;gap:18px;align-items:center;flex-wrap:wrap;
+  margin:20px auto;max-width:1120px;padding:12px 20px;
+  position:sticky;top:14px;z-index:20;
+}
+.nav .brand{font-family:var(--display);font-weight:800;color:var(--mist);text-decoration:none;margin-right:auto;font-size:1.05rem}
+.nav a.link{color:var(--moss);text-decoration:none;font-size:.93rem}
+.nav a.link:hover,.nav a.link:focus-visible{color:var(--jade)}
+
+header.pw-hero{padding:clamp(40px,7vw,84px) 0 8px}
+.pw-eyebrow{
+  font-family:var(--data);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--jade);display:block;margin-bottom:14px
+}
+h1{
+  font-family:var(--display);font-weight:800;line-height:1.02;margin:0 0 14px;
+  font-size:clamp(2.3rem,6.2vw,4.1rem);letter-spacing:-.02em
+}
+h1 em{font-style:normal;color:var(--jade)}
+.pw-lede{font-size:clamp(1.02rem,2vw,1.2rem);color:var(--mist);max-width:64ch;margin:0 0 10px}
+.pw-sub{color:var(--moss);max-width:66ch;margin:0}
+
+.pw-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:34px 0 8px}
+.pw-stat{padding:20px}
+.pw-n{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,4.4vw,2.7rem);color:var(--jade);line-height:1}
+.pw-l{font-weight:600;margin-top:6px}
+.pw-s{color:var(--moss);font-size:.85rem;margin-top:3px}
+
+section{padding:clamp(38px,6vw,68px) 0 0}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(1.5rem,3.2vw,2.05rem);margin:0 0 10px;letter-spacing:-.01em}
+.pw-blurb{color:var(--moss);max-width:74ch;margin:0 0 24px}
+
+.pw-hls{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.pw-hl{padding:22px}
+.pw-hl h3{font-family:var(--display);font-size:1.05rem;margin:0 0 8px;color:var(--fern)}
+.pw-hl p{margin:0;color:var(--moss);font-size:.94rem}
+
+.pw-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.pw-repo{padding:22px;display:flex;flex-direction:column;gap:10px}
+.pw-repo-h{display:flex;flex-direction:column;gap:9px}
+.pw-repo h3{font-family:var(--data);font-size:1rem;margin:0;color:var(--mist);word-break:break-word}
+.pw-repo p{margin:0;color:var(--moss);font-size:.93rem;flex:1}
+.pw-tags{display:flex;flex-wrap:wrap;gap:6px}
+.pw-tag{
+  font-family:var(--data);font-size:.72rem;padding:3px 9px;border-radius:999px;
+  background:var(--glass-strong);border:1px solid var(--edge);color:var(--moss)
+}
+.pw-tag-on{border-color:var(--edge-bright);color:var(--jade)}
+.pw-tag-dim{opacity:.8}
+.pw-links{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:2px}
+.pw-go{font-weight:600;text-decoration:none}
+.pw-go:hover{text-decoration:underline}
+.pw-src{color:var(--moss);font-size:.88rem;text-decoration:none;border-bottom:1px solid var(--edge)}
+.pw-src:hover{color:var(--mist)}
+.pw-off{border:0;opacity:.65}
+
+.pw-foot{margin:clamp(48px,7vw,86px) 0 40px;padding:24px;color:var(--moss);font-size:.9rem}
+.pw-foot code{font-family:var(--data);color:var(--fern)}
+.pw-stamp{font-family:var(--data);color:var(--jade)}
+
+@media (prefers-reduced-motion:no-preference){
+  .pw-repo,.pw-hl,.pw-stat{transition:transform .18s ease,border-color .18s ease}
+  .pw-repo:hover,.pw-hl:hover{transform:translateY(-2px);border-color:var(--edge-bright)}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav tile" aria-label="Site">
+  <a class="brand" href="/">Aden Kingi</a>
+  <a class="link" href="/">Portfolio</a>
+  <a class="link" href="https://github.com/kingithegreat" rel="noopener">GitHub</a>
+  <a class="link" href="/cv/aden-kingi-cv.pdf">CV</a>
+</nav>
+
+<header class="pw-hero">
+  <div class="wrap">
+    <span class="pw-eyebrow">Live record · rebuilt daily</span>
+    <h1>Proof of <em>work</em></h1>
+    <p class="pw-lede">Not a list of things I could build — a record of what is built, tested and running right now. This page regenerates itself from the GitHub API every morning, so it is as current as the code.</p>
+    <p class="pw-sub">Test counts are parsed from the actual test files at build time, not typed in by hand. Where a project is private, it says so rather than linking you to a 404.</p>
+
+    <div class="pw-stats">
+      
+      <div class="pw-stat tile">
+        <div class="pw-n">18</div>
+        <div class="pw-l">Projects</div>
+        <div class="pw-s">18 pushed in the last 90 days</div>
+      </div>
+      
+      <div class="pw-stat tile">
+        <div class="pw-n">692</div>
+        <div class="pw-l">Automated tests</div>
+        <div class="pw-s">counted from source, not typed in</div>
+      </div>
+      
+      <div class="pw-stat tile">
+        <div class="pw-n">9</div>
+        <div class="pw-l">Games</div>
+        <div class="pw-s">on one shared CI platform</div>
+      </div>
+      
+      <div class="pw-stat tile">
+        <div class="pw-n">3</div>
+        <div class="pw-l">Live now</div>
+        <div class="pw-s">click through below</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>How it is built</h2>
+    <p class="pw-blurb">The interesting part of this portfolio is not any single project — it is that one person can keep 9 games and a desktop app moving at once. That comes down to three decisions.</p>
+    <div class="pw-hls">
+        <div class="pw-hl tile">
+          <h3>Engine-free game logic</h3>
+          <p>Every game&#39;s rules live in one module with zero Roblox API calls, so the entire logic layer runs under a plain Luau CLI. That is what makes a headless pipeline possible: the tests below run in CI in seconds, with no editor and no game client.</p>
+        </div>
+        <div class="pw-hl tile">
+          <h3>A written contract, not conventions</h3>
+          <p>The portfolio has a single canonical engineering contract covering architecture invariants, the local CI mirror, and which operations require a human. Every repo points at it instead of restating it.</p>
+        </div>
+        <div class="pw-hl tile">
+          <h3>Publishing is a guarded operation</h3>
+          <p>Pushing to main on a live game deploys to players, so agents and tooling branch and open a pull request; a human merges. The MCP server enforces the same rule server-side.</p>
+        </div></div>
+  </div>
+</section>
+
+<div class="wrap">
+
+      <section class="pw-group" id="pw-games">
+        <h2>Roblox games</h2>
+        <p class="pw-blurb">9 games, one shared CI platform. Each is a Rojo/Luau project whose game logic lives in a single engine-free module, so the whole rules layer runs and is tested on a plain CLI with no Roblox in the loop. Built, tested and published headlessly — no Studio in the pipeline.</p>
+        <div class="pw-grid">
+        <article class="pw-repo tile">
+          <header class="pw-repo-h">
+            <h3>gym-simulator</h3>
+            <div class="pw-tags">
+              <span class="pw-tag">Luau</span>
+              <span class="pw-tag pw-tag-on">254 tests</span>
+              <span class="pw-tag pw-tag-dim">updated 3d ago</span>
+            </div>
+          </header>
+          <p>Gym progression sim — training rigs, zones, basketball park, rebirth and ascension. The largest of the nine.</p>
+          <div class="pw-links">
+            
+            <span class="pw-src pw-off">Private repo</span>
+          </div>
+        </article>
+        <article class="pw-repo tile">
+          <header class="pw-repo-h">
+            <h3>vacuum-palace</h3>
+            <div class="pw-tags">
+              <span class="pw-tag">Luau</span>
+              <span class="pw-tag pw-tag-on">122 tests</span>
+              <span class="pw-tag pw-tag-dim">updated 3d ago</span>
+            </div>
+          </header>
+          <p>Collection sim — clear rooms, unlock palace wings, pets, prestige floors.</p>
+          <div class="pw-links">
+            
+            <span class="pw-src pw-off">Private repo</span>
+          </div>
+        </article>
+        <article class="pw-repo tile">
+          <header class="pw-repo-h">
+            <h3>night-shift</h3>
+            <div class="pw-tags">
+              <span class="pw-tag">Luau</span>
+              <span class="pw-tag pw-tag-on">63 tests</span>
+              <span class="pw-tag pw-tag-dim">updated today</span>
+            </div>
+          </header>
+          <p>Co-op horror. Work a graveyard shift at a small dairy while a presence escalates. Published and running; store page pending.</p>
+          <div class="pw-links">
+            
+            <span class="pw-src pw-off">Private repo</span>
+          </div>
+        </article>
+        <article class="pw-repo tile">
+          <header class="pw-repo-h">
+            <h3>tactical-command-rbx</h3>
+            <div class="pw-tags">
+              <span class="pw-tag">Luau</span>
+              <span class="pw-tag pw-tag-on">79 tests</span>
+              <span class="pw-tag pw-tag-dim">updated 3d ago</span>
+            </div>
+          </header>
+          <p>Turn-based squad tactics — the Roblox port of the web game below.</p>
+          <div class="pw-links">
+            
+            <span class="pw-src pw-off">Private repo</span>
+          </div>
+        </article>
+        <article class="pw-repo tile">
+          <header class="pw-repo-h">
+            <h3>dig-site</h3>
+            <div class="pw-tags">
+              <span class="pw-tag">Luau</span>
+              <span class="pw-tag pw-tag-on">37 tests</span>
+              <span class="pw-tag pw-tag-dim">updated 3d ago</span>
+            </div>
+          </header>
+          <p>Archaeology sim — dig, clean carefully, sell, prestige across six sites.</p>
+          <div class="pw-links">
+            
+            <span class="pw-src pw-off">Private repo</span>
+          </div>
+        </article>
+        <article class="pw-repo tile">
+          <header class="pw-repo-h">
+            <h3>scrap-empire</h3>
+            <div class="pw-tags">
+              <span class="pw-tag">Luau</span>
+              <span class="pw-tag pw-tag-on">44 tests</span>
+              <span class="pw-tag pw-tag-dim">updated today</span>
+            </div>
+          </header>
+          <p>Junkyard automation tycoon with steal-and-defend raiding on a shared map.</p>
+          <div class="pw-links">
+            
+            <span class="pw-src pw-off">Private repo</span>
+          </div>
+        </article>
+        <article class="pw-repo tile">
+          <header class="pw-repo-h">
+            <h3>tower-together</h3>
+            <div class="pw-tags">
+              <span class="pw-tag">Luau</span>
+              <span class="pw-tag pw-tag-on">28 tests</span>
+              <span class="pw-tag pw-tag-dim">updated 3d ago</span>
+            </div>
+          </header>
+          <p>Community-built obby — one shared tower, climb it then build the next floor.</p>
+          <div class="pw-links">
+            
+            <span class="pw-src pw-off">Private repo</span>
+          </div>
+        </article>
+        <article class="pw-repo tile">
+          <header class="pw-repo-h">
+            <h3>cauldron-corner</h3>
+            <div class="pw-tags">
+              <span class="pw-tag">Luau</span>
+              <span class="pw-tag pw-tag-on">33 tests</span>
+              <span class="pw-tag pw-tag-dim">updated today</span>
+            </div>
+          </header>
+          <p>Cozy potion shop — gather, brew, fill orders. No combat, no fail states.</p>
+          <div class="pw-links">
+            
+            <span class="pw-src pw-off">Private repo</span>
+          </div>
+        </article>
+        <article class="pw-repo tile">
+          <header class="pw-repo-h">
+            <h3>bolt-brawlers</h3>
+            <div class="pw-tags">
+              <span class="pw-tag">Luau</span>
+              <span class="pw-tag pw-tag-on">32 tests</span>
+              <span class="pw-tag pw-tag-dim">updated today</span>
+            </div>
+          </header>
+          <p>Auto-battler — assemble a bot, fight escalating waves, overclock to prestige.</p>
+          <div class="pw-links">
+            
+            <span class="pw-src pw-off">Private repo</span>
+          </div>
+        </article></div>
+      </section>
+      <section class="pw-group" id="pw-platform">
+        <h2>Platform &amp; tooling</h2>
+        <p class="pw-blurb">The part that makes 9 games maintainable by one person. A change to the pipeline ships once, not 9 times.</p>
+        <div class="pw-grid">
+        <article class="pw-repo tile">
+          <header class="pw-repo-h">
+            <h3>roblox-ci</h3>
+            <div class="pw-tags">
+              
+              
+              <span class="pw-tag pw-tag-dim">updated 3d ago</span>
+            </div>
+          </header>
+          <p>Shared reusable CI and headless publish workflow every game calls. Compile gate, CLI test run, place build, Open Cloud publish with retry and verifiable outcomes. Carries the portfolio&#39;s written engineering contract.</p>
+          <div class="pw-links">
+            
+            <span class="pw-src pw-off">Private repo</span>
+          </div>
+        </article>
+        <article class="pw-repo tile">
+          <header class="pw-repo-h">
+            <h3>mission-control</h3>
+            <div class="pw-tags">
+              <span class="pw-tag">JavaScript</span>
+              
+              <span class="pw-tag pw-tag-dim">updated today</span>
+            </div>
+          </header>
+          <p>Ops dashboard that rebuilds itself from the GitHub API every morning and commits the result — repo state, CI, open work.</p>
+          <div class="pw-links">
+            
+            <span class="pw-src pw-off">Private repo</span>
+          </div>
+        </article>
+        <article class="pw-repo tile">
+          <header class="pw-repo-h">
+            <h3>bench-mcp</h3>
+            <div class="pw-tags">
+              <span class="pw-tag">JavaScript</span>
+              
+              <span class="pw-tag pw-tag-dim">updated 3d ago</span>
+            </div>
+          </header>
+          <p>Personal MCP server on Cloud Run — GitHub tooling with the token held server-side and a hard guard against pushing to any branch that deploys to production.</p>
+          <div class="pw-links">
+            
+            <span class="pw-src pw-off">Private repo</span>
+          </div>
+        </article>
+        <article class="pw-repo tile">
+          <header class="pw-repo-h">
+            <h3>yt-dlp-mcp</h3>
+            <div class="pw-tags">
+              <span class="pw-tag">TypeScript</span>
+              
+              <span class="pw-tag pw-tag-dim">updated 1mo ago</span>
+            </div>
+          </header>
+          <p>Standalone MCP server exposing video download and metadata as tools for any MCP client.</p>
+          <div class="pw-links">
+            
+            <a class="pw-src" href="https://github.com/kingithegreat/yt-dlp-mcp" rel="noopener">Source</a>
+          </div>
+        </article>
+        <article class="pw-repo tile">
+          <header class="pw-repo-h">
+            <h3>site-template</h3>
+            <div class="pw-tags">
+              <span class="pw-tag">HTML</span>
+              
+              <span class="pw-tag pw-tag-dim">updated 3d ago</span>
+            </div>
+          </header>
+          <p>Scaffold for the website pipeline — single-file site plus an automated screenshot verification loop.</p>
+          <div class="pw-links">
+            
+            <a class="pw-src" href="https://github.com/kingithegreat/site-template" rel="noopener">Source</a>
+          </div>
+        </article></div>
+      </section>
+      <section class="pw-group" id="pw-web">
+        <h2>Web &amp; product</h2>
+        <p class="pw-blurb">Things with users, or one step from them.</p>
+        <div class="pw-grid">
+        <article class="pw-repo tile">
+          <header class="pw-repo-h">
+            <h3>comand</h3>
+            <div class="pw-tags">
+              <span class="pw-tag">TypeScript</span>
+              
+              <span class="pw-tag pw-tag-dim">updated 2d ago</span>
+            </div>
+          </header>
+          <p>Turn-based squad tactics in the browser — campaign, online matchmaking, Elo, offline-capable PWA.</p>
+          <div class="pw-links">
+            <a class="pw-go" href="https://comand.vercel.app" rel="noopener">Open it &rarr;</a>
+            <a class="pw-src" href="https://github.com/kingithegreat/comand" rel="noopener">Source</a>
+          </div>
+        </article>
+        <article class="pw-repo tile">
+          <header class="pw-repo-h">
+            <h3>bussnessbuilder</h3>
+            <div class="pw-tags">
+              <span class="pw-tag">TypeScript</span>
+              
+              <span class="pw-tag pw-tag-dim">updated today</span>
+            </div>
+          </header>
+          <p>BusinessFlow — a shopfront builder. Angular, containerised, deployed on Cloud Run with Stripe billing.</p>
+          <div class="pw-links">
+            
+            <a class="pw-src" href="https://github.com/kingithegreat/bussnessbuilder" rel="noopener">Source</a>
+          </div>
+        </article>
+        <article class="pw-repo tile">
+          <header class="pw-repo-h">
+            <h3>pyespa-lawncare-demo</h3>
+            <div class="pw-tags">
+              <span class="pw-tag">HTML</span>
+              
+              <span class="pw-tag pw-tag-dim">updated 17d ago</span>
+            </div>
+          </header>
+          <p>Live showcase site built on BusinessFlow for a Tauranga lawn-care business.</p>
+          <div class="pw-links">
+            <a class="pw-go" href="https://kingithegreat.github.io/pyespa-lawncare-demo/" rel="noopener">Open it &rarr;</a>
+            <a class="pw-src" href="https://github.com/kingithegreat/pyespa-lawncare-demo" rel="noopener">Source</a>
+          </div>
+        </article>
+        <article class="pw-repo tile">
+          <header class="pw-repo-h">
+            <h3>kingithegreat.github.io</h3>
+            <div class="pw-tags">
+              <span class="pw-tag">HTML</span>
+              
+              <span class="pw-tag pw-tag-dim">updated 2d ago</span>
+            </div>
+          </header>
+          <p>This site. Hand-rolled — no framework, no dependencies; the background field and orb are plain canvas.</p>
+          <div class="pw-links">
+            <a class="pw-go" href="https://kingithegreat.github.io/" rel="noopener">Open it &rarr;</a>
+            <a class="pw-src" href="https://github.com/kingithegreat/kingithegreat.github.io" rel="noopener">Source</a>
+          </div>
+        </article></div>
+      </section>
+</div>
+
+<div class="wrap">
+  <footer class="pw-foot tile">
+    <p>Generated from the GitHub API by <code>scripts/build-work.mjs</code> and committed by a scheduled Action. Languages seen across these repos: Luau, HTML, TypeScript, JavaScript.</p>
+    <p>Last rebuilt: <span class="pw-stamp">13 August 2026 at 9:00 am</span> — if that date is recent, everything above is too.</p>
+    
+  </footer>
+</div>
+
+</body>
+</html>

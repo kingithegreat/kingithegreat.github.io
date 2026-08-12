@@ -1,0 +1,81 @@
+name: Refresh proof-of-work page
+
+# Rebuilds work.html from the GitHub API so the page ages by itself. Runs after
+# Mission Control's 19:00 UTC refresh so both boards describe the same morning.
+#
+# ── Optional secret ─────────────────────────────────────────────────────────
+#   WORK_PAT — a classic PAT with `repo` scope.
+#
+#   The default GITHUB_TOKEN can only read THIS repo, so without WORK_PAT the
+#   test counts for the private game repos cannot be re-read. That is handled,
+#   not ignored: the build recovers the previous numbers from the committed
+#   work.html and prints a note on the page saying they were carried over. The
+#   page stays correct and honest; it just stops tracking new tests.
+#
+#   Add it at: Settings → Secrets and variables → Actions → New repository
+#   secret, named WORK_PAT. (mission-control uses the same kind of token under
+#   the name MC_PAT — that one expires 2026-10-23, so if you mint one, consider
+#   doing both at once.)
+
+on:
+  schedule:
+    - cron: "30 19 * * *" # 19:30 UTC = ~7:30am NZ, just after Mission Control
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "work-config.json"
+      - "scripts/build-work.mjs"
+      - ".github/workflows/refresh-work.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-work
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Rebuild work.html
+        env:
+          WORK_PAT: ${{ secrets.WORK_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/build-work.mjs
+
+      - name: Fail if the page lost its headline numbers
+        # A page that rebuilds into an empty shell must not be published. The
+        # carry-over path means this should be impossible, so if it trips,
+        # something is actually wrong rather than merely unauthenticated.
+        run: |
+          set -euo pipefail
+          tests=$(grep -oE '<div class="pw-n">[0-9,]+</div>' work.html | sed -n '2p' | tr -dc '0-9')
+          if [[ -z "${tests}" || "${tests}" -lt 1 ]]; then
+            echo "::error::work.html rebuilt with no test count — refusing to publish it."
+            exit 1
+          fi
+          echo "Test total on the rebuilt page: ${tests}"
+
+      - name: Commit if the page changed
+        run: |
+          set -euo pipefail
+          # The timestamp changes every run, so committing on any diff would
+          # produce a commit a day that says nothing. Only publish when the
+          # substance changed — ignore the "Last rebuilt" line.
+          if git diff --quiet -I 'Last rebuilt' -- work.html; then
+            echo "No substantive change — leaving the page as it is."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add work.html
+            git commit -m "chore: refresh proof-of-work page ($(date -u +%Y-%m-%d))"
+            git push
+          fi
