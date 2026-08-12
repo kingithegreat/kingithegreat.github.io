@@ -119,6 +119,12 @@ const topLangs = [...langs.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5).ma
 
 const NINETY = Date.now() - 90 * 864e5;
 const activeCount = [...meta.values()].filter((r) => new Date(r.pushed_at).getTime() > NINETY).length;
+// Only state the recency figure when EVERY project was actually readable this
+// run. With a lapsed or absent token only the public repos resolve, and
+// "6 pushed in the last 90 days" printed beside "18 projects" does not read as
+// a partial measurement -- it reads as twelve abandoned repos. An unstated
+// number beats a number that quietly means something else.
+const sawEverything = meta.size === wanted.length;
 
 const liveLinks = cfg.groups.flatMap((g) => g.repos).filter((r) => r.live);
 const gameCount = (cfg.groups.find((g) => g.id === "games")?.repos ?? []).length;
@@ -320,7 +326,7 @@ h2{font-family:var(--display);font-weight:700;font-size:clamp(1.5rem,3.2vw,2.05r
     <p class="pw-sub">Test counts are parsed from the actual test files at build time, not typed in by hand. Where a project is private, it says so rather than linking you to a 404.</p>
 
     <div class="pw-stats">
-      ${stat(projectCount, "Projects", `${activeCount} pushed in the last 90 days`)}
+      ${stat(projectCount, "Projects", sawEverything ? `${activeCount} pushed in the last 90 days` : "shown here, of a larger estate")}
       ${stat(totalTests.toLocaleString("en-NZ"), "Automated tests", "counted from source, not typed in")}
       ${stat(gameCount, "Games", "on one shared CI platform")}
       ${stat(liveLinks.length, "Live now", "click through below")}
