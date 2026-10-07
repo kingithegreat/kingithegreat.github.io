@@ -13,6 +13,7 @@ OUT = os.path.join(os.path.dirname(__file__), "cv", "aden-kingi-cv.pdf")
 FONT_DIR = "/usr/share/fonts/truetype/dejavu"
 pdfmetrics.registerFont(TTFont("CVSans", os.path.join(FONT_DIR, "DejaVuSans.ttf")))
 pdfmetrics.registerFont(TTFont("CVSans-Bold", os.path.join(FONT_DIR, "DejaVuSans-Bold.ttf")))
+pdfmetrics.registerFontFamily("CVSans", normal="CVSans", bold="CVSans-Bold", italic="CVSans", boldItalic="CVSans-Bold")
 NAVY = HexColor("#141043")
 CYAN = HexColor("#167E7C")
 TEXT = HexColor("#17233A")
@@ -22,7 +23,7 @@ LINE = HexColor("#D9E2EA")
 
 doc = SimpleDocTemplate(OUT, pagesize=A4, rightMargin=18*mm, leftMargin=18*mm,
                         topMargin=15*mm, bottomMargin=16*mm,
-                        title="Aden Kingi - Software Developer CV", author="Aden Kingi")
+                        title="Aden Kingi - Technical Support CV", author="Aden Kingi")
 styles = getSampleStyleSheet()
 styles.add(ParagraphStyle(name="Name", fontName="CVSans-Bold", fontSize=25, leading=28, textColor=NAVY, spaceAfter=2))
 styles.add(ParagraphStyle(name="Role", fontName="CVSans-Bold", fontSize=11, leading=15, textColor=CYAN, spaceAfter=7))
@@ -36,14 +37,14 @@ styles.add(ParagraphStyle(name="Small", fontName="CVSans", fontSize=8.3, leading
 
 P = lambda txt, style="BodyCV": Paragraph(txt, styles[style])
 story = []
-story += [P("Aden Kingi", "Name"), P("Graduate Software Developer | Tauranga, New Zealand", "Role"),
+story += [P("Aden Kingi", "Name"), P("Technical Support / IT Service Desk | Auckland, NZ (relocating from Tauranga)", "Role"),
           P("027 548 4458  |  adenkingi@hotmail.com  |  github.com/kingithegreat  |  kingithegreat.github.io", "Contact"), Spacer(1, 5)]
 
 story += [P("Professional profile", "Section"),
-          P("Graduate software developer with a Bachelor of Applied Information Technology (Level 7), awarded in June 2026 with a 92% average. Study built a strong foundation in secure software development, client-server web applications, human-computer interaction, testing and practical problem-solving. Brings this technical foundation together with more than 20 years of hands-on work in trades, installation, operations and customer service.")]
+          P("Bachelor of Applied Information Technology (Level 7) graduate from Toi Ohomai Institute of Technology, awarded June 2026 with a 92% programme average (five of six courses graded A+). Seeking a technical support or IT service desk role in Auckland. Understands hardware and software, learns systems quickly and is confident troubleshooting for people struggling with their devices, backed by tech retail at Phone Life, customer service at Aqua 360 and Subway, and more than 20 years of hands-on trades and installation work.")]
 
 story += [P("Education and course learning", "Section"),
-          P("Bachelor of Applied Information Technology (Level 7)  |  Toi Ohomai Institute of Technology", "Subhead"),
+          P("Bachelor of Applied Information Technology (Level 7)  |  Toi Ohomai, Tauranga", "Subhead"),
           P("Awarded June 2026  |  92% programme average  |  Five of six courses graded A+", "Meta"), Spacer(1, 3)]
 learning = [
     [P("Secure software development", "Subhead"), P("Applied security principles and threat-aware thinking; Cyber Security: 98 (A+).", "Small")],
@@ -56,12 +57,14 @@ t = Table(learning, colWidths=[47*mm, 127*mm], hAlign="LEFT")
 t.setStyle(TableStyle([("BACKGROUND", (0,0), (0,-1), PALE), ("BOX", (0,0), (-1,-1), .5, LINE),
                        ("INNERGRID", (0,0), (-1,-1), .35, LINE), ("VALIGN", (0,0), (-1,-1), "TOP"),
                        ("LEFTPADDING", (0,0), (-1,-1), 7), ("RIGHTPADDING", (0,0), (-1,-1), 7),
-                       ("TOPPADDING", (0,0), (-1,-1), 6), ("BOTTOMPADDING", (0,0), (-1,-1), 6)]))
-story += [t, Spacer(1, 5), P("Earlier qualifications", "Subhead"),
+                       ("TOPPADDING", (0,0), (-1,-1), 4), ("BOTTOMPADDING", (0,0), (-1,-1), 4)]))
+story += [t, Spacer(1, 4), P("<b>What study developed:</b> strong computer literacy, practical troubleshooting and a methodical approach to diagnosing everyday technical issues and supporting users, a solid base for entry-level technical support and ITIL-style incident and request work. Results and letters: kingithegreat.github.io", "Small"), Spacer(1, 3), P("Earlier qualifications", "Subhead"),
           P("Diploma in Software Development (Level 6) · Diploma in Sport and Recreation (Levels 5–6, 2009–2012) · Certificate in Sports Leadership (Level 4, 2009) — Toi Ohomai Institute of Technology", "Small")]
 
-story += [P("Technical foundation", "Section")]
+story += [P("Skills", "Section")]
 skills = [
+    [P("Technical support", "Subhead"), P("Hardware troubleshooting, software troubleshooting, Microsoft 365 / computer literacy, problem solving and ownership through to resolution", "Small")],
+    [P("Customer service", "Subhead"), P("Explaining technical details clearly, helping customers choose the right device or plan, calm front-of-house service and booking logistics", "Small")],
     [P("Programming", "Subhead"), P("TypeScript, JavaScript (Node.js), Python, Kotlin, Luau, HTML/CSS, SQL", "Small")],
     [P("Application development", "Subhead"), P("React, Angular, Electron, React Native, Jetpack Compose, Capacitor", "Small")],
     [P("Data, cloud and tools", "Subhead"), P("Firebase / Firestore, Git, GitHub Actions, Google Cloud Run, Vercel, Stripe, Ollama", "Small")],
@@ -71,10 +74,10 @@ t = Table(skills, colWidths=[47*mm, 127*mm], hAlign="LEFT")
 t.setStyle(TableStyle([("BACKGROUND", (0,0), (0,-1), PALE), ("BOX", (0,0), (-1,-1), .5, LINE),
                        ("INNERGRID", (0,0), (-1,-1), .35, LINE), ("VALIGN", (0,0), (-1,-1), "TOP"),
                        ("LEFTPADDING", (0,0), (-1,-1), 7), ("RIGHTPADDING", (0,0), (-1,-1), 7),
-                       ("TOPPADDING", (0,0), (-1,-1), 5), ("BOTTOMPADDING", (0,0), (-1,-1), 5)]))
+                       ("TOPPADDING", (0,0), (-1,-1), 3.5), ("BOTTOMPADDING", (0,0), (-1,-1), 3.5)]))
 story += [t, PageBreak()]
 
-story += [P("Aden Kingi", "Name"), P("Software Developer", "Role"), Spacer(1, 3),
+story += [P("Aden Kingi", "Name"), P("Technical Support / IT Service Desk", "Role"), Spacer(1, 3),
           P("Applied learning in practice", "Section"),
           P("Selected projects show how I have practised and extended the skills developed through my degree. They support my course-based foundation; my main evidence is the learning and results above.")]
 projects = [
@@ -91,7 +94,7 @@ for title, stack, desc in projects:
 story += [P("Employment history", "Section")]
 jobs = [
     ("Retail Sales Associate", "Phone Life, Tauranga Crossing  |  Apr 2026–Present", "Help customers choose phones, plans and accessories by translating technical details into clear recommendations. Handle sales transactions, stock and day-to-day store tasks."),
-    ("Student Employment", "Aqua 360 and Subway, Tauranga  |  2023–2026", "Supported jetski rental operations, safety briefings and bookings, alongside food safety and front-of-house service while completing full-time study."),
+    ("Student Employment", "Aqua 360 and Subway, Tauranga  |  2023–2026", "Supported jet ski rental operations, safety briefings and bookings, alongside food safety and front-of-house service while completing full-time study."),
     ("Installation Technician", "HomePlus, Tauranga  |  2022–2023", "Installed security screens, wardrobes, awnings and balustrades; measured on site, consulted with clients and coordinated installation work."),
     ("Aluminium Joiner and Fabricator", "Tasman Aluminium, Tauranga  |  2017–2022", "Fabricated architectural joinery from technical drawings, with care for precision, finish and safe work practices."),
 ]
@@ -110,7 +113,7 @@ def footer(canvas, doc):
     canvas.setStrokeColor(LINE); canvas.setLineWidth(.5)
     canvas.line(18*mm, 12*mm, w-18*mm, 12*mm)
     canvas.setFont("CVSans", 7.5); canvas.setFillColor(MUTED)
-    canvas.drawString(18*mm, 8*mm, "Aden Kingi  |  Tauranga, New Zealand")
+    canvas.drawString(18*mm, 8*mm, "Aden Kingi  |  027 548 4458  |  adenkingi@hotmail.com  |  Auckland, New Zealand")
     canvas.drawRightString(w-18*mm, 8*mm, f"{doc.page} / 2")
     canvas.restoreState()
 
