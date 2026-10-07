@@ -1,3 +1,7 @@
+# NOTE (Oct 2026): cv/aden-kingi-cv.pdf is now printed from cv.html so it matches the web CV:
+#   google-chrome --headless=new --no-pdf-header-footer --print-to-pdf=cv/aden-kingi-cv.pdf file://$PWD/cv.html
+# This older ReportLab layout is kept for reference; running it will overwrite that PDF.
+
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_LEFT, TA_RIGHT
 from reportlab.lib.pagesizes import A4
