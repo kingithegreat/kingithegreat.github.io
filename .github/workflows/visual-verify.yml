@@ -49,7 +49,11 @@ jobs:
           }
           await browser.close();
           JS
-          npx --yes playwright@1.49.1 run-server --help >/dev/null 2>&1 || true
+          # shot.mjs imports 'playwright' as an ES module, which needs a local
+          # node_modules copy (npx's cache is not resolvable from here). The repo
+          # has no package.json, so create a throwaway one for the install.
+          echo '{"private":true}' > package.json
+          npm i --no-audit --no-fund playwright@1.49.1
           node shot.mjs
 
       - name: Publish to ci-screenshots branch (single-commit orphan)
