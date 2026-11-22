@@ -93,7 +93,8 @@
         },
         {
           "name": "bussnessbuilder",
-          "what": "BusinessFlow — a shopfront builder. Angular, containerised, deployed on Cloud Run with Stripe billing."
+          "what": "BusinessFlow — a website builder for small businesses. Angular and TypeScript with Node.js server-side rendering and Firebase, deployed on Cloud Run with Stripe billing. Finished and live.",
+          "live": "https://businessflow-722923667291.us-central1.run.app"
         },
         {
           "name": "pyespa-lawncare-demo",
